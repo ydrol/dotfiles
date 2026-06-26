@@ -9,6 +9,10 @@ function SOURCE() {
   [ -f "$1" ] && source "$1"
 }
 
+function ADD_PATH() {
+  [ -d "$1" ] && export PATH="$PATH:$1"
+}
+
 SOURCE ~/.zsh_aliases
 SOURCE ~/.bash_aliases
 
@@ -32,6 +36,9 @@ eval "$(pyenv init - $myshell)"
 eval "$(pyenv virtualenv-init -)"
 
 SOURCE ~/.fzf.$myshell
+
+ADD_PATH ~/bin
+ADD_PATH ~/.local/bin
 
 export USE_BUILTIN_RIPGREP=0
 

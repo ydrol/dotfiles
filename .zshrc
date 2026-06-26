@@ -65,6 +65,7 @@ setopt PUSHD_IGNORE_DUPS
 #setopt PUSHD_SILENT
 DIRSTACKSIZE=10
 
+source ~/.profile
 source ~/.shellrc
 
 
