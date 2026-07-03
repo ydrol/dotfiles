@@ -41,5 +41,6 @@ ADD_PATH ~/bin
 ADD_PATH ~/.local/bin
 
 export USE_BUILTIN_RIPGREP=0
+export SSH_AUTH_SOCK="$(echo /tmp/ssh-*/agent.* )"
 
 echo loaded $myshell
