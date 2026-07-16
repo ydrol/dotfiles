@@ -67,6 +67,3 @@ DIRSTACKSIZE=10
 
 source ~/.profile
 source ~/.shellrc
-
-
-
