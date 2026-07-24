@@ -1,6 +1,9 @@
 # ~/.zshrc: sourced by zsh for interactive shells.
 # Converted from a Debian/Ubuntu .bashrc.
 
+source ~/.zfunctions
+
+
 # --- History ---------------------------------------------------------------
 HISTFILE="$HOME/.zsh_history"
 HISTSIZE=1000          # lines kept in memory for the session
@@ -65,5 +68,4 @@ setopt PUSHD_IGNORE_DUPS
 #setopt PUSHD_SILENT
 DIRSTACKSIZE=10
 
-source ~/.profile
 source ~/.shellrc

@@ -1,0 +1,9 @@
+#
+
+function LORDY_SOURCE() {
+  [ -f "$1" ] && source "$1"
+}
+
+function LORDY_ADD_PATH() {
+  [ -d "$1" ] && export PATH="$PATH:$1"
+}
