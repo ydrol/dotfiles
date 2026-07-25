@@ -27,6 +27,7 @@ backup_path() {
 installed=0
 skipped=0
 backed_up=0
+declare -a backups=()
 
 while IFS= read -r -d '' src; do
     rel="${src#"$files_dir"/}"
@@ -34,7 +35,7 @@ while IFS= read -r -d '' src; do
 
     mkdir -p "$(dirname "$target")"
 
-    if [[ -L "$target" && "$(readlink "$target")" == "$src" ]]; then
+    if [[ -L "$target" ]] && [[ "$(realpath -m "$target")" == "$(realpath -m "$src")" ]]; then
         skipped=$((skipped + 1))
         continue
     fi
@@ -44,6 +45,7 @@ while IFS= read -r -d '' src; do
         mv "$target" "$backup"
         echo "backed up ~/$rel -> $backup"
         backed_up=$((backed_up + 1))
+        backups+=("$backup|$target")
     fi
 
     ln -s "$src" "$target"
@@ -53,3 +55,19 @@ done < <(find "$files_dir" \( -type f -o -type l \) -print0)
 
 echo
 echo "done: $installed linked, $backed_up backed up, $skipped already up to date"
+
+diverged=()
+for pair in "${backups[@]+"${backups[@]}"}"; do
+    backup="${pair%%|*}"
+    target="${pair#*|}"
+    [[ -f "$backup" && -f "$target" ]] || continue
+    diff -q "$backup" "$target" >/dev/null 2>&1 || diverged+=("$backup" "$target")
+done
+
+if [[ ${#diverged[@]} -gt 0 ]]; then
+    echo
+    echo "backed-up files whose content differs from what was just installed:"
+    for ((i = 0; i < ${#diverged[@]}; i += 2)); do
+        echo "  diff \"${diverged[i]}\" \"${diverged[i + 1]}\""
+    done
+fi
