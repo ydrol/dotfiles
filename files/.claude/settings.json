@@ -27,7 +27,14 @@
       "Bash(git --no-pager show:*)",
       "Bash(git checkout:*)",
       "Bash(grep:*)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(pytest:*)",
+      "Skill(code-review)",
+      "Skill(update-config)",
+      "Skill(fewer-permission-prompts)",
+      "Workflow(code-review)",
+      "WebSearch",
+      "Read(//tmp/claude/**)"
     ]
   }
 }
