@@ -33,7 +33,17 @@ while IFS= read -r -d '' src; do
     rel="${src#"$files_dir"/}"
     target="$target_home/$rel"
 
-    mkdir -p "$(dirname "$target")"
+    dir="$(dirname "$target")"
+    # mkdir -p fails with "File exists" when a path component is a dangling
+    # symlink (points to a missing/non-dir target). Back it up out of the way.
+    if [[ -L "$dir" && ! -d "$dir" ]]; then
+        backup="$(backup_path "$dir")"
+        mv "$dir" "$backup"
+        echo "backed up ~/${dir#"$target_home"/} -> $backup"
+        backed_up=$((backed_up + 1))
+        backups+=("$backup|$dir")
+    fi
+    mkdir -p "$dir"
 
     if [[ -L "$target" ]] && [[ "$(realpath -m "$target")" == "$(realpath -m "$src")" ]]; then
         skipped=$((skipped + 1))
