@@ -1,5 +1,6 @@
 {
   "skipWorkflowUsageWarning": true,
+  "defaultShell": "bash",
   "theme": "auto",
   "plansDirectory":"~/.claude/plans",
   "env": {
