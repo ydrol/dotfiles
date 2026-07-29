@@ -13,6 +13,11 @@
         "*.servicenow.com",
         "*.service-now.com"
       ]
+    },
+    "filesystem": {
+      "allowRead": [
+        "~/.ssh/known_hosts"
+      ]
     }
   },
   "permissions": {
@@ -38,7 +43,7 @@
       "Workflow(code-review)",
       "WebSearch",
       "Read(//tmp/claude/**)",
-      "Read(~/.ssh/config)"
+      "Read(~/.ssh/config)",
       "Read(~/.ssh/known_hosts)"
     ]
   }
