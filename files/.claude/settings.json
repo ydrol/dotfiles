@@ -39,6 +39,7 @@
       "WebSearch",
       "Read(//tmp/claude/**)",
       "Read(~/.ssh/config)"
+      "Read(~/.ssh/known_hosts)"
     ]
   }
 }
