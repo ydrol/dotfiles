@@ -45,5 +45,22 @@
       "Read(~/.ssh/config)",
       "Read(~/.ssh/known_hosts)"
     ]
+  },
+  "hooks": {
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          { "type": "command", "command": "$HOME/.claude/hooks/notify.sh 'Claude needs input'" }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          { "type": "command", "command": "$HOME/.claude/hooks/notify.sh 'Claude finished'" }
+        ]
+      }
+    ]
   }
 }

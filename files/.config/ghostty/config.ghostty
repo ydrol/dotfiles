@@ -1,0 +1,4 @@
+theme = Builtin Light
+#theme = Builtin Dark
+
+desktop-notifications = true
