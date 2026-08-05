@@ -1,23 +1,6 @@
 {
-  "skipWorkflowUsageWarning": true,
-  "defaultShell": "bash",
-  "theme": "auto",
   "env": {
     "NODE_USE_ENV_PROXY": "1"
-  },
-  "sandbox": {
-    "network": {
-      "allowedDomains": [
-        "www.servicenow.com",
-        "*.servicenow.com",
-        "*.service-now.com"
-      ]
-    },
-    "filesystem": {
-      "allowRead": [
-        "~/.ssh/known_hosts"
-      ]
-    }
   },
   "permissions": {
     "allow": [
@@ -51,16 +34,40 @@
       {
         "matcher": "",
         "hooks": [
-          { "type": "command", "command": "$HOME/.claude/hooks/notify.sh 'Claude needs input'" }
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/notify.sh 'Claude needs input'"
+          }
         ]
       }
     ],
     "Stop": [
       {
         "hooks": [
-          { "type": "command", "command": "$HOME/.claude/hooks/notify.sh 'Claude finished'" }
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/notify.sh 'Claude finished'"
+          }
         ]
       }
     ]
-  }
+  },
+  "defaultShell": "bash",
+  "sandbox": {
+    "network": {
+      "allowedDomains": [
+        "www.servicenow.com",
+        "*.servicenow.com",
+        "*.service-now.com"
+      ]
+    },
+    "filesystem": {
+      "allowRead": [
+        "~/.ssh/known_hosts"
+      ]
+    }
+  },
+  "skipWorkflowUsageWarning": true,
+  "theme": "auto",
+  "model": "opus[1m]"
 }
