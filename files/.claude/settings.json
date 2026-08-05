@@ -26,7 +26,9 @@
       "WebSearch",
       "Read(//tmp/claude/**)",
       "Read(~/.ssh/config)",
-      "Read(~/.ssh/known_hosts)"
+      "Read(~/.ssh/known_hosts)",
+      "Bash(now-sdk:*)",
+      "Bash(snowdrift:*)"
     ]
   },
   "hooks": {
@@ -54,6 +56,11 @@
   },
   "defaultShell": "bash",
   "sandbox": {
+    "enabled": true,
+    "excludedCommands": [
+      "now-sdk",
+      "snowdrift"
+    ],
     "network": {
       "allowedDomains": [
         "www.servicenow.com",
