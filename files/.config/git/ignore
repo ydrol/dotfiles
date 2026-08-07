@@ -1,0 +1,43 @@
+# Global gitignore. Git reads this automatically as $XDG_CONFIG_HOME/git/ignore
+# (~/.config/git/ignore) whenever core.excludesFile is unset — no .gitconfig entry needed.
+#
+# Only affects UNTRACKED files. Anything already committed is unaffected.
+
+# ---------------------------------------------------------------------------
+# Claude Code sandbox mountpoint stubs.
+#
+# The Bash sandbox blocks reads of shell config and IDE paths by bind-mounting
+# /dev/null over them RELATIVE TO THE WORKING DIRECTORY. A bind mount needs an
+# existing mountpoint, so a nonexistent target gets an empty file created to
+# mount onto; teardown leaves the stub behind. Result: every repo you run a
+# sandboxed command in accumulates a fistful of 0-byte files at its root, which
+# `git add -A` would happily commit.
+#
+# Tells that these are stubs and not real config: they appear as 0-byte files
+# (including .idea and .vscode, which are normally DIRECTORIES), all created
+# within milliseconds of each other, and while a sandboxed command is running
+# they are live mounts — `rm` reports "Device or resource busy".
+#
+# Every pattern below is anchored with a leading `/` so it matches only the
+# repository root, where the stubs appear. Without the anchor these would also
+# swallow files/.zshrc, files/.gitconfig and friends in the dotfiles repo the
+# moment you added a new one.
+#
+# NOT listed here, deliberately: .gitmodules. The sandbox stubs it too, but a
+# real .gitmodules also lives at the repo root, and globally ignoring it would
+# break `git submodule add` in a way that is very hard to diagnose. One stray
+# 0-byte file beats that.
+#
+# If a repo genuinely needs to commit one of these (a team that versions
+# .vscode/settings.json, say), un-ignore it in that repo's own .gitignore —
+# repo-level rules take precedence over this file:  !/.vscode/
+# ---------------------------------------------------------------------------
+/.bashrc
+/.bash_profile
+/.zshrc
+/.zprofile
+/.profile
+/.gitconfig
+/.ripgreprc
+/.idea
+/.vscode

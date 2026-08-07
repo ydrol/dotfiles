@@ -57,10 +57,6 @@
   "defaultShell": "bash",
   "sandbox": {
     "enabled": true,
-    "excludedCommands": [
-      "now-sdk",
-      "snowdrift"
-    ],
     "network": {
       "allowedDomains": [
         "www.servicenow.com",
@@ -72,9 +68,12 @@
       "allowRead": [
         "~/.ssh/known_hosts"
       ]
-    }
+    },
+    "excludedCommands": [
+      "now-sdk",
+      "snowdrift"
+    ]
   },
   "skipWorkflowUsageWarning": true,
-  "theme": "auto",
-  "model": "opus[1m]"
+  "theme": "auto"
 }
