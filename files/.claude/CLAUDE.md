@@ -20,6 +20,21 @@ permission allow-rules so they don't re-prompt:
   (`python3 scan.py`) rather than cramming loops/heredocs into a one-liner —
   it avoids quoting bugs and matches allow-rules cleanly.
 
+## Plan format
+
+When re-displaying a plan in response to a follow-up prompt or question (i.e. a
+plan that has already been shown), do BOTH:
+
+1. **Amend the body** of the plan in place so it reads as one coherent, current
+   plan.
+2. **Restate the changes at the end** in a section titled **`## Plan
+   Amendments`**, newest first (reverse chronological — each new revision's
+   delta goes at the top of that section). Each entry is the delta for one
+   revision: what changed and why, not a re-description of the whole plan.
+
+Keep this section only while the plan is a living document; drop it once the
+plan is finalised into a committed doc.
+
 ## Reference Caching mechanism
 
 When a project depends on expensive-to-fetch source documents (Google Drive
