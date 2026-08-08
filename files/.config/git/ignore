@@ -41,3 +41,7 @@
 /.ripgreprc
 /.idea
 /.vscode
+
+**/.claude/.cc-writes/
+
+**/.claude/settings.local.json

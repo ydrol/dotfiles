@@ -31,6 +31,7 @@ LORDY_SOURCE ~/.fzf.$myshell
 
 LORDY_ADD_PATH ~/bin
 LORDY_ADD_PATH ~/.local/bin
+LORDY_ADD_PATH ~/.opencode/bin
 
 export USE_BUILTIN_RIPGREP=0
 export SSH_AUTH_SOCK="$(echo /tmp/ssh-*/agent.* )"
