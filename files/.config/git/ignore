@@ -3,6 +3,12 @@
 #
 # Only affects UNTRACKED files. Anything already committed is unaffected.
 
+logs/
+dist/
+**/.claude/.cc-writes/
+**/.claude/settings.local.json
+HANDOFF-*md
+*.log
 # ---------------------------------------------------------------------------
 # Claude Code sandbox mountpoint stubs.
 #
@@ -42,6 +48,3 @@
 /.idea
 /.vscode
 
-**/.claude/.cc-writes/
-
-**/.claude/settings.local.json
