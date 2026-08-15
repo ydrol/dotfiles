@@ -1,3 +1,5 @@
+# Add deno completions to search path
+if [[ ":$FPATH:" != *":/home/lordy/.zsh/completions:"* ]]; then export FPATH="/home/lordy/.zsh/completions:$FPATH"; fi
 # ~/.zshrc: sourced by zsh for interactive shells.
 # Converted from a Debian/Ubuntu .bashrc.
 

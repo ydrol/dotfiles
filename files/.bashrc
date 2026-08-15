@@ -99,3 +99,4 @@ if ! shopt -oq posix; then
   fi
 fi
 
+source /home/lordy/.local/share/bash-completion/completions/deno.bash
