@@ -1,4 +1,9 @@
-theme = Builtin Light
-#theme = Builtin Dark
-
+theme = light:Builtin Light,dark:Builtin Dark
 desktop-notifications = true
+font-family = "JetBrains Mono"
+cursor-invert-fg-bg = true
+
+# Alternative: fixed magenta cursor, visible on both light and dark
+# (remove cursor-invert-fg-bg above - it overrides these)
+#cursor-color = #d33682
+#cursor-text = #ffffff
