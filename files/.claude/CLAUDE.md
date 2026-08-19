@@ -20,6 +20,23 @@ permission allow-rules so they don't re-prompt:
   (`python3 scan.py`) rather than cramming loops/heredocs into a one-liner —
   it avoids quoting bugs and matches allow-rules cleanly.
 
+## Don't re-verify what I assert
+
+When I state a fact, a measurement, or the value a change should take, treat it
+as already checked. **Ask before probing, querying a live system, running an
+experiment, or searching the web to confirm it.** A one-line question costs
+nothing; a probe run costs tokens and wall-clock to re-derive what I already
+know. Assume I've done the homework — I rarely raise something on a whim.
+
+- This covers work undertaken *to confirm a claim of mine*: live-instance
+  probes, exploratory test runs, doc lookups. Reading code to find the places a
+  change has to touch is ordinary implementation work — do that without asking.
+- If you think verification is genuinely worth it — you suspect I'm wrong, or
+  the change is hard to reverse — say in one sentence what you'd check and why,
+  then wait for my answer.
+- If you think I'm wrong, argue it from what you already know rather than
+  proving it empirically. State the contradiction and let me respond.
+
 ## Plan format
 
 When re-displaying a plan in response to a follow-up prompt or question (i.e. a
