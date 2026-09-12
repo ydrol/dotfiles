@@ -29,14 +29,22 @@ HANDOFF-*md
 # swallow files/.zshrc, files/.gitconfig and friends in the dotfiles repo the
 # moment you added a new one.
 #
-# NOT listed here, deliberately: .gitmodules. The sandbox stubs it too, but a
-# real .gitmodules also lives at the repo root, and globally ignoring it would
-# break `git submodule add` in a way that is very hard to diagnose. One stray
-# 0-byte file beats that.
-#
 # If a repo genuinely needs to commit one of these (a team that versions
 # .vscode/settings.json, say), un-ignore it in that repo's own .gitignore —
 # repo-level rules take precedence over this file:  !/.vscode/
+#
+# TWO OF THESE ARE ALSO REAL FILES, so read the note above before debugging a
+# "why won't git stage this" problem:
+#
+#   .gitmodules  — written by `git submodule add`. In a submodule repo you MUST
+#                  put `!/.gitmodules` in that repo's .gitignore, or the add
+#                  appears to work and the file never gets committed. This
+#                  entry was previously left out for exactly that reason; it is
+#                  listed now because the stub recurs constantly and the
+#                  repo-level opt-out is the cheaper of the two failure modes.
+#   .mcp.json    — Claude Code's project-scoped MCP server config. Teams that
+#                  share MCP servers commit it; those repos need
+#                  `!/.mcp.json` locally.
 # ---------------------------------------------------------------------------
 /.bashrc
 /.bash_profile
@@ -47,4 +55,26 @@ HANDOFF-*md
 /.ripgreprc
 /.idea
 /.vscode
+/.gitmodules
+/.mcp.json
+
+# The sandbox masks the whole Claude Code config surface too, so the same stubs
+# appear under .claude/. Like .idea and .vscode, most of these are normally
+# DIRECTORIES and show up as 0-byte files.
+#
+# READ THIS BEFORE ADDING PROJECT CLAUDE CONFIG: skills/, commands/, agents/
+# and hooks/ are exactly the things a team does commit. Ignoring only affects
+# UNTRACKED files, so an existing tracked one is unaffected — but a NEW one
+# will not show in `git status` and `git add -A` will skip it. In a repo that
+# shares them, put the opt-out in its own .gitignore:  !/.claude/skills/
+/.claude/agents
+/.claude/commands
+/.claude/hooks
+/.claude/launch.json
+/.claude/loop.md
+/.claude/output-styles
+/.claude/routines
+/.claude/scheduled_tasks.json
+/.claude/skills
+/.claude/workflows
 

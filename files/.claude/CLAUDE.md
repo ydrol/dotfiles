@@ -52,6 +52,19 @@ plan that has already been shown), do BOTH:
 Keep this section only while the plan is a living document; drop it once the
 plan is finalised into a committed doc.
 
+## Project documentation artefacts
+
+My projects carry a standard documentation set — `README.md`, `AGENTS.md` (with
+`CLAUDE.md` symlinked to it), `decisions/D###-slug.md` ADRs with a generated
+index, `documentation/` reference files, `BACKLOG.md` — each with a defined
+format. **`~/.claude/project-artefacts.md` is the master specification.**
+
+Read it before: creating or restructuring a project doc, writing or citing an
+ADR, recording open work, initialising a new repo's docs, or auditing an
+existing repo against the standard. Don't invent a structure or a frontmatter
+field when that file already defines one, and don't restate its rules inside a
+project — cite it.
+
 ## Reference Caching mechanism
 
 When a project depends on expensive-to-fetch source documents (Google Drive
