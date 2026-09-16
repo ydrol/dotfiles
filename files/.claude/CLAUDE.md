@@ -82,3 +82,44 @@ relative path, as Markdown:
 - Keep a `./resources/README.md` index listing every cached file, its type, and
   a link to the origin. Index (but don't convert) already-machine-readable or
   very large raw files — pull those on demand instead of caching multi-MB blobs.
+
+## Code comments
+
+Comments in deliverable code are succinct and elegant, or absent. The failure mode to avoid is the
+**tutorial comment** — the dominant style in training data, and never what I want.
+
+- **Never restate the code.** If the line below says what the comment says, delete the comment.
+- **Rename before commenting.** A comment explaining what a variable holds is a variable with the
+  wrong name. Fix the name and the comment has nothing left to say.
+- **No project-internal references.** Decision ids, ticket numbers, doc section numbers, internal
+  filenames — none of it means anything to someone reading the code. Rationale belongs in the
+  commit message or the design doc, not the source.
+- **Plain English, standard domain terms.** Prefer the word the wider industry uses over one this
+  codebase invented.
+- **Length is a smell.** If it takes a paragraph to make a block clear, the block is not clear.
+  Refactor until the code is the comment, then delete the comment.
+
+What survives the cut is a *why* the code genuinely cannot express: a non-obvious external
+constraint, a workaround for someone else's behaviour, an ordering that looks arbitrary and is not.
+
+**Never touch a comment you were not asked to touch.** Comment edits are in scope only when:
+
+- the code is new;
+- the comment sits on code the change actually modifies; or
+- the task *is* a comment cleanup or refactor, asked for as such.
+
+Everything else is unsolicited churn. A tidied comment three functions away turns a one-line change
+into an unreviewable diff, and the separation a careful commit history gives you is lost the moment
+the reviewer reads the deployed artefact rather than the repo — deployment records the push, not
+the commit.
+
+## Deleting files
+
+**Never `rm -rf` a path you have not just enumerated.** Not as cleanup, not for a directory you
+believe you created, not because it is "obviously" safe.
+
+The sequence is always: `ls -Rl <path>` and read the output; `rm` the individual files; then
+`rmdir` each directory from the leaves up. `rmdir` refuses a non-empty directory, which is the
+point — it fails closed when the enumeration missed something.
+
+A wrong path expands silently and there is nothing to undo.
