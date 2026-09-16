@@ -65,24 +65,6 @@ existing repo against the standard. Don't invent a structure or a frontmatter
 field when that file already defines one, and don't restate its rules inside a
 project — cite it.
 
-## Reference Caching mechanism
-
-When a project depends on expensive-to-fetch source documents (Google Drive
-`.docx`/`.doc`/`.pdf`/`.xlsx`, Google native docs, or other files that need
-conversion), cache them locally under `./resources`, mirroring the source's
-relative path, as Markdown:
-
-- Convert each source to Markdown (e.g. Drive `read_file_content` →
-  `.md`), preserving the folder structure of the origin under `./resources`.
-- Prepend YAML front matter linking back to the origin so staleness can be
-  detected: `source_id`, `source_url`, `source_mime`, `source_modified`
-  (the origin's last-modified timestamp at cache time), and `cached_utc`.
-- **Staleness check / refresh:** compare the live source's modified time against
-  front-matter `source_modified`; if the source is newer, re-fetch and overwrite.
-- Keep a `./resources/README.md` index listing every cached file, its type, and
-  a link to the origin. Index (but don't convert) already-machine-readable or
-  very large raw files — pull those on demand instead of caching multi-MB blobs.
-
 ## Code comments
 
 Comments in deliverable code are succinct and elegant, or absent. The failure mode to avoid is the
