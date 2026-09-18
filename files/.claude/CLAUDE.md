@@ -19,6 +19,7 @@ permission allow-rules so they don't re-prompt:
 - **Push nontrivial logic into a script file** and invoke it trivially
   (`python3 scan.py`) rather than cramming loops/heredocs into a one-liner —
   it avoids quoting bugs and matches allow-rules cleanly.
+- zsh - dont use trailing comments for tty input unless zsh compatible
 
 ## Don't re-verify what I assert
 
