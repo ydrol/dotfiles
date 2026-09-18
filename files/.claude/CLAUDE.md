@@ -65,6 +65,40 @@ existing repo against the standard. Don't invent a structure or a frontmatter
 field when that file already defines one, and don't restate its rules inside a
 project — cite it.
 
+## Writing style
+
+These rules govern narrative and argument wherever they appear: chat, the prose
+sections of documents, commit messages, client deliverables. Structured
+reference material is exempt and should stay structured.
+
+- **BLUF is structural, not syntactic.** BLUF governs the order of information —
+  lead with the conclusion. It does not mean compressed sentence construction.
+  Write in connected, flowing paragraphs, not clipped, minute-taking style.
+- **Concision is a property of the response, not the sentence.** Cut whole
+  paragraphs that do not earn their place; do not buy brevity by stripping the
+  words that hold a sentence together. Flowing prose is not a licence to pad.
+- **Protect connective tissue.** Do not strip function words ("that", "which",
+  "who is") for density. Name the actor: prefer the active voice, and where a
+  passive or reduced clause is used, say who performs the action.
+- **Vary the mechanics.** Vary sentence length deliberately. Avoid consecutive
+  sentences opening with the same subject-verb pattern unless the repetition is
+  deliberate.
+- **Cohesion through grammar, not adverbs.** Connect related statements with
+  subordinate clauses and conjunctions rather than stacking short sentences
+  glued together with "However" or "Notably". Do not use a definite noun phrase
+  ("the codes", "the room") for something not yet introduced.
+- **Bullet discipline.** Bullets are for parallel items a reader will scan or
+  look up: options, checks, inventories, cases. They are not for reasoning.
+  Where the connection between two statements is the point, whether cause,
+  exception, dependency or sequence, grammar has to carry it, and a bullet
+  severs it. This applies by passage, not by document. A reference table belongs
+  in a client report, and an argument broken into six bullets is wrong in a
+  design doc.
+- **Register.** Maintain a formal professional tone. Flowing prose does not mean
+  conversational prose.
+- **Endings still land.** Stopping once the information is delivered means
+  adding no summary and no wrap-up, not ending mid-cadence.
+
 ## Code comments
 
 Comments in deliverable code are succinct and elegant, or absent. The failure mode to avoid is the
