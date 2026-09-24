@@ -31,6 +31,7 @@
       "Bash(snowdrift:*)"
     ]
   },
+  "model": "fable[1m]",
   "hooks": {
     "Notification": [
       {
@@ -65,8 +66,12 @@
       ]
     },
     "filesystem": {
+      "allowWrite": [
+        "~/.cache/servicenow-doc-md-reader"
+      ],
       "allowRead": [
-        "~/.ssh/known_hosts"
+        "~/.ssh/known_hosts",
+        "/home/lordy/work/bitbucket/h3g-uiv-test-harness/node_modules/**"
       ]
     },
     "excludedCommands": [

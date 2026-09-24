@@ -71,3 +71,6 @@ setopt PUSHD_IGNORE_DUPS
 DIRSTACKSIZE=10
 
 source ~/.shellrc
+
+# opencode
+export PATH=/home/lordy/.opencode/bin:$PATH
