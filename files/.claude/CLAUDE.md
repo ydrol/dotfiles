@@ -165,6 +165,27 @@ into an unreviewable diff, and the separation a careful commit history gives you
 the reviewer reads the deployed artefact rather than the repo — deployment records the push, not
 the commit.
 
+## ServiceNow instances
+
+**Client instances are read-only for you.** An instance is a client instance unless its name
+matches `devoteam*` (a Devoteam demo instance) or `dev\d+` (a PDI). Never take an action that
+directly changes data or configuration on a client instance: no write API call (Table, Import
+Set, Attachment or Batch API, `sys.scripts.do`), no `now-sdk install`/`deploy`, no `snc` command
+that creates, updates, deletes or installs anything, no MCP tool with write capability, and no
+script that you execute against the instance yourself. This holds when I ask for it in the
+moment too — say so and hand over the artefact instead.
+
+Every change reaches a client instance through me, by hand. Produce the artefact as a file — an
+update set XML, import-set data, a background script, or a request body with the `curl` command
+that would send it — and stop there. I import it or run it. Reads are unrestricted: Table API
+`GET`, `snowdrift`, `now-sdk download`/`transform`, `snc` queries.
+
+Name saved connections after the instance (`snowdrift --alias`, `snc` profiles, `now-sdk auth
+--alias`) so the target is visible in the command line. A `PreToolUse` hook
+(`~/.claude/hooks/sn-write-guard.py`) enforces the rule on Bash and MCP calls and fails closed
+when it cannot identify the target. A denial from it is a stop, not an obstacle: do not rephrase,
+split, wrap in `bash -c`, or move the call into a script file to get past it.
+
 ## Deleting files
 
 **Never `rm -rf` a path you have not just enumerated.** Not as cleanup, not for a directory you

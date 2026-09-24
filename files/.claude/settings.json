@@ -33,6 +33,18 @@
   },
   "model": "fable[1m]",
   "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash|mcp__.*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 $HOME/.claude/hooks/sn-write-guard.py",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
     "Notification": [
       {
         "matcher": "",
