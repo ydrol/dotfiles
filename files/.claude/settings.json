@@ -62,7 +62,11 @@
       "allowedDomains": [
         "www.servicenow.com",
         "*.servicenow.com",
-        "*.service-now.com"
+        "*.service-now.com",
+        "127.0.0.1:46000",
+        "127.0.0.1:46500",
+        "127.0.0.1:47000",
+        "127.0.0.1:47500"
       ]
     },
     "filesystem": {
