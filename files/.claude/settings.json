@@ -31,7 +31,6 @@
       "Bash(snowdrift:*)"
     ]
   },
-  "model": "fable[1m]",
   "hooks": {
     "PreToolUse": [
       {
@@ -96,5 +95,6 @@
     ]
   },
   "skipWorkflowUsageWarning": true,
-  "theme": "auto"
+  "theme": "auto",
+  "editorMode": "vim"
 }

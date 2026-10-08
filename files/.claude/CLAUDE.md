@@ -134,6 +134,14 @@ reference material is exempt and should stay structured.
   conversational prose.
 - **Endings still land.** Stopping once the information is delivered means
   adding no summary and no wrap-up, not ending mid-cadence.
+- **No undefined abbreviations.** Use an acronym or abbreviation only if it is
+  well known outside the project (REST, JSON, API, URL, CMDB, ETL) or the
+  project's `GLOSSARY.md` defines it. Otherwise write the term out every time,
+  or write it out on first use in a reply and then use the glossary spelling.
+  My home platform is ServiceNow; vendor jargon from other stacks (BMC,
+  Pentaho, AWS, …) is mental load on top of the work, and each undefined
+  acronym costs a lookup. If a term keeps recurring, propose a glossary entry
+  rather than abbreviating it.
 
 ## Code comments
 
@@ -143,9 +151,12 @@ Comments in deliverable code are succinct and elegant, or absent. The failure mo
 - **Never restate the code.** If the line below says what the comment says, delete the comment.
 - **Rename before commenting.** A comment explaining what a variable holds is a variable with the
   wrong name. Fix the name and the comment has nothing left to say.
-- **No project-internal references.** Decision ids, ticket numbers, doc section numbers, internal
-  filenames — none of it means anything to someone reading the code. Rationale belongs in the
-  commit message or the design doc, not the source.
+- **A reference points onward; it never carries the meaning.** A decision id, ticket number or
+  design-doc section may close a comment, but only after the comment has stated the constraint or
+  reasoning in full, so a reader with no access to the referenced document loses only the
+  provenance. A bare id standing in for an explanation (`# see D145`) is not a comment. Internal
+  filenames stay out. Rationale too long for a comment belongs in the commit message or the design
+  doc, not the source.
 - **Plain English, standard domain terms.** Prefer the word the wider industry uses over one this
   codebase invented.
 - **Length is a smell.** If it takes a paragraph to make a block clear, the block is not clear.
