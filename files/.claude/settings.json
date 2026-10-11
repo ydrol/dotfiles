@@ -28,7 +28,10 @@
       "Read(~/.ssh/config)",
       "Read(~/.ssh/known_hosts)",
       "Bash(now-sdk:*)",
-      "Bash(snowdrift:*)"
+      "Bash(snowdrift:*)",
+      "Bash(nnsdk:*)",
+      "Bash(nnsdk test:*)",
+      "Bash(nnsdk push:*)"
     ]
   },
   "hooks": {
@@ -91,7 +94,8 @@
     },
     "excludedCommands": [
       "now-sdk",
-      "snowdrift"
+      "snowdrift",
+      "nnsdk"
     ]
   },
   "skipWorkflowUsageWarning": true,
