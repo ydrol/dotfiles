@@ -197,6 +197,13 @@ Name saved connections after the instance (`snowdrift --alias`, `snc` profiles, 
 when it cannot identify the target. A denial from it is a stop, not an obstacle: do not rephrase,
 split, wrap in `bash -c`, or move the call into a script file to get past it.
 
+## Google Docs
+
+**Create every Google Doc in my private My Drive, and start its name with `[AI] `.** Never
+create one in a shared drive or a shared folder, and never share it on creation; I decide who
+sees it. The prefix applies to every new doc and to every rename of a doc you created, so that
+anything an agent produced is identifiable at a glance in Drive search and in shared links.
+
 ## Deleting files
 
 **Never `rm -rf` a path you have not just enumerated.** Not as cleanup, not for a directory you
