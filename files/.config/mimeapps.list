@@ -33,6 +33,7 @@ application/vnd.oasis.opendocument.text=libreoffice7.5-writer.desktop
 application/x-mobipocket-ebook=calibre-gui.desktop
 inode/symlink=io.github.celluloid_player.Celluloid.desktop
 x-scheme-handler/claude-cli=claude-code-url-handler.desktop
+x-scheme-handler/claude=com.anthropic.Claude.desktop
 
 [Added Associations]
 application/json=code.desktop;gvim.desktop;
