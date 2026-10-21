@@ -100,3 +100,7 @@ if ! shopt -oq posix; then
 fi
 
 source /home/lordy/.local/share/bash-completion/completions/deno.bash
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/lordy/.local/bin:$PATH"

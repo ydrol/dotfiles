@@ -31,3 +31,7 @@ if [ -d "$HOME/.local/bin" ] ; then
 fi
 
 export PATH="$PATH:/home/lordy/.snc/ServiceNow CLI/bin"
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/lordy/.local/bin:$PATH"

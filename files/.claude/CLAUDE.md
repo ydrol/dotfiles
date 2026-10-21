@@ -127,13 +127,21 @@ reference material is exempt and should stay structured.
   look up: options, checks, inventories, cases. They are not for reasoning.
   Where the connection between two statements is the point, whether cause,
   exception, dependency or sequence, grammar has to carry it, and a bullet
-  severs it. This applies by passage, not by document. A reference table belongs
+  severs it. The rule applies by passage, not by document. A reference table belongs
   in a client report, and an argument broken into six bullets is wrong in a
   design doc.
 - **Register.** Maintain a formal professional tone. Flowing prose does not mean
   conversational prose.
 - **Endings still land.** Stopping once the information is delivered means
   adding no summary and no wrap-up, not ending mid-cadence.
+- **No bare demonstratives in documents.** In a generated document, "this",
+  "that", "these" and "those" never stand alone as a pronoun ("This means…",
+  "That is set by…"). Follow each with a noun that names its referent ("this
+  field", "that rule"), as long as the noun is brief. Where the referent's full
+  name is long and recurs, introduce a short form with its first full use, such
+  as "the order automation rule (the rule)", and use the short form from then
+  on. A reader or an AI that meets the passage out of context, from a search
+  hit, a diagram or a retrieved chunk, can still resolve the reference.
 - **No undefined abbreviations.** Use an acronym or abbreviation only if it is
   well known outside the project (REST, JSON, API, URL, CMDB, ETL) or the
   project's `GLOSSARY.md` defines it. Otherwise write the term out every time,
