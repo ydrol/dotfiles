@@ -150,6 +150,14 @@ reference material is exempt and should stay structured.
   Pentaho, AWS, …) is mental load on top of the work, and each undefined
   acronym costs a lookup. If a term keeps recurring, propose a glossary entry
   rather than abbreviating it.
+- **"Currently", not "today".** Where a sentence describes the present state
+  of a system, product or process, write "currently" or "at present" rather
+  than "today". Keep "today" where it means the calendar day.
+- **Negate the verb, not the object.** Write "x does not extend any y", not
+  "x extends no y"; "the table has no index" reads naturally, but "the rule
+  matches no records" should be "the rule does not match any records". The
+  object-negated form is terse and formal, and the reader has to reach the end
+  of the clause before learning that it is a negative.
 
 ## Code comments
 
