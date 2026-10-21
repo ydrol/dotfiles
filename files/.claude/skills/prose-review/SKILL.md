@@ -46,6 +46,10 @@ Check every remaining sentence against `patterns.md` and the Writing style rules
 Compare each changed paragraph with the original: the same claims, the same facts, nothing added.
 Revert any change that reflects only taste.
 
+Then put every rewritten paragraph through Pass 1 again, as if someone else had written it. A
+rewrite introduces faults of its own: a verb repeated across the new sentences, a "then" or "this"
+whose antecedent has moved. Revise until the rewrite passes.
+
 ## Output
 
 Apply the edits in place. Report each changed paragraph with a one-line reason, then any

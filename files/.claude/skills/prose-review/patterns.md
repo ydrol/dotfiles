@@ -12,9 +12,12 @@ Each entry pairs a failure with its repair. Add new entries as they are spotted.
 | x extends no y | x does not extend any y |
 | the rule matches no records | the rule does not match any records |
 | today, the integration polls hourly | currently, the integration polls hourly |
+| each response, both from order placement and from every poll | each response, whether to the original order or to a later poll |
+| Staging tables hold each response … Staging lets the control compare it | Staging tables hold each response … Keeping the response there lets the control compare it |
 
 Object negation stays where it is idiomatic, with "have" and "be": "the table has no index" is
-correct. "Today" stays where it means the calendar day.
+correct. "Today" stays where it means the calendar day. A noun that has named a thing must not
+then name an activity: once "staging" means the tables, "staging lets…" makes the reader switch.
 
 ## Paragraphs
 
