@@ -1,0 +1,16 @@
+{
+  "sn-write-guard": {
+    "PreToolUse": [
+      {
+        "matcher": "run_command|mcp.*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 $HOME/.claude/hooks/sn-write-guard.py",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

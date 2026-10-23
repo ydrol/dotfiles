@@ -191,7 +191,9 @@ def command_writes(command):
 
 
 def mcp_writes(tool_name, tool_input):
-    server, _, tool = tool_name[len("mcp__"):].partition("__")
+    prefix = "mcp__" if tool_name.startswith("mcp__") else "mcp_"
+    sep = "__" if prefix == "mcp__" else "_"
+    server, _, tool = tool_name[len(prefix):].partition(sep)
     if not (MCP_SN_SERVER.search(server) or MCP_SN_SERVER.search(tool)):
         return [], set()
     if not MCP_WRITE_TOOL.search(tool):
@@ -204,20 +206,23 @@ def mcp_writes(tool_name, tool_input):
     return [f"MCP tool {tool_name} has write capability"], instances
 
 
-def deny(reason):
+def deny(reason, is_agy=False):
     message = (
         f"Blocked: {reason}. Client ServiceNow instances are read-only from this session. "
         "Trusted instances are devoteam* and dev<digits> only, and the target must be visible in the call. "
         "Produce the change as a file (update set XML, import-set data, background script or request body) "
         "for the user to import or run manually. Do not rephrase, split or wrap the call to get past this check."
     )
-    print(json.dumps({
-        "hookSpecificOutput": {
-            "hookEventName": "PreToolUse",
-            "permissionDecision": "deny",
-            "permissionDecisionReason": message,
-        }
-    }))
+    if is_agy:
+        print(json.dumps({"decision": "deny", "reason": message}))
+    else:
+        print(json.dumps({
+            "hookSpecificOutput": {
+                "hookEventName": "PreToolUse",
+                "permissionDecision": "deny",
+                "permissionDecisionReason": message,
+            }
+        }))
 
 
 def verdict(reasons, instances):
@@ -236,17 +241,28 @@ def main():
         event = json.load(sys.stdin)
     except json.JSONDecodeError:
         return
-    tool_name = event.get("tool_name", "")
-    tool_input = event.get("tool_input") or {}
-    if tool_name == "Bash":
-        command = tool_input.get("command") or ""
+    is_agy = "toolCall" in event or "--agy" in sys.argv[1:]
+    if is_agy:
+        tool_call = event.get("toolCall") or {}
+        tool_name = tool_call.get("name", "")
+        tool_input = tool_call.get("args") or {}
+    else:
+        tool_name = event.get("tool_name", "")
+        tool_input = event.get("tool_input") or {}
+
+    if tool_name in ("Bash", "run_command"):
+        command = tool_input.get("CommandLine" if is_agy else "command") or ""
         reason = verdict(command_writes(command), harvest_instances(command, tokenize(command)))
-    elif tool_name.startswith("mcp__"):
+    elif tool_name.startswith(("mcp__", "mcp_")):
         reason = verdict(*mcp_writes(tool_name, tool_input))
     else:
         reason = None
+
     if reason:
-        deny(reason)
+        deny(reason, is_agy=is_agy)
+    elif is_agy:
+        decision = "ask" if isinstance(tool_input, dict) and tool_input.get("BypassSandbox") else "allow"
+        print(json.dumps({"decision": decision}))
 
 
 if __name__ == "__main__":
