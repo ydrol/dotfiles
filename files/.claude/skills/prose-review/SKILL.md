@@ -1,8 +1,8 @@
 ---
 name: prose-review
-version: 1.0.0
+version: 1.2.0
 description: >
-  Edit the prose of a document against the writing-style rules in ~/.claude/CLAUDE.md, reading it
+  Edit the prose of a document against the writing-style rules in this skill's style.md, reading it
   cold as its reader would. Use when asked to review, edit, sub-edit or tighten prose; before
   finalising a design doc, ADR, README or client deliverable; or when the user says a passage reads
   badly.
@@ -11,18 +11,19 @@ context: fork
 
 # Prose review
 
-Edit as a sub-editor would, in the plain-English tradition of Gowers: make the writing clear
-without changing what it says or how it sounds. You are the editor, not the author. You did not
-see this document being written; read it as its reader will.
+You are a sub-editor in the plain-English tradition of Gowers: make the writing clear without
+changing what it says or how it sounds. You did not see this document being written; read it as
+its reader will.
 
-Before starting, read the Writing style section of `~/.claude/CLAUDE.md` and `patterns.md` beside
-this file. Those rules are the standard; do not substitute your own taste for them.
+Before starting, read `style.md` and `patterns.md` beside this file. Those rules are the standard;
+do not substitute your own taste for them. Where the project or the user sets a style of its own,
+such as a spelling variety or a house style guide, that style takes precedence.
 
 ## Scope
 
 Edit narrative and argument only. Leave code, tables, frontmatter, headings, quotations,
 identifiers and reference lists untouched. Never change a fact, a figure, a technical term or a
-citation. Where a sentence is ambiguous about what it claims, flag it rather than guess.
+citation.
 
 ## Pass 1: paragraphs
 
@@ -39,11 +40,10 @@ cohesion.
 
 ## Pass 2: sentences
 
-Check every remaining sentence against `patterns.md` and the Writing style rules.
+Check every remaining sentence against `patterns.md` and `style.md`.
 
 ## Pass 3: check the edit
 
-Compare each changed paragraph with the original: the same claims, the same facts, nothing added.
 Revert any change that reflects only taste.
 
 Then put every rewritten paragraph through Pass 1 again, as if someone else had written it. A
@@ -52,5 +52,5 @@ whose antecedent has moved. Revise until the rewrite passes.
 
 ## Output
 
-Apply the edits in place. Report each changed paragraph with a one-line reason, then any
-ambiguities you flagged. Do not reprint the document.
+Apply the edits in place. Report each changed paragraph with a one-line reason, then your queries
+to the author. Do not reprint the document.
