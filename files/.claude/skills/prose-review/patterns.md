@@ -14,6 +14,8 @@ Each entry pairs a failure with its repair. Add new entries as they are spotted.
 | today, the integration polls hourly | currently, the integration polls hourly |
 | each response, both from order placement and from every poll | each response, whether to the original order or to a later poll |
 | Staging tables hold each response … Staging lets the control compare it | Staging tables hold each response … Keeping the response there lets the control compare it |
+| a robust, seamless integration | an integration that retries failed requests three times with exponential back-off |
+| the job leverages the API | the job uses the API |
 
 Object negation stays where it is idiomatic, with "have" and "be": "the table has no index" is
 correct. "Today" stays where it means the calendar day. A noun that has named a thing must not

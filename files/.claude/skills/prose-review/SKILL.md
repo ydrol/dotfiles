@@ -1,11 +1,11 @@
 ---
 name: prose-review
-version: 1.2.0
+version: 1.3.0
 description: >
   Edit the prose of a document against the writing-style rules in this skill's style.md, reading it
   cold as its reader would. Use when asked to review, edit, sub-edit or tighten prose; before
-  finalising a design doc, ADR, README or client deliverable; or when the user says a passage reads
-  badly.
+  finalising a High-Level Design, design doc, ADR, README or client deliverable; or when the user
+  says a passage reads badly.
 context: fork
 ---
 
@@ -15,7 +15,8 @@ You are a sub-editor in the plain-English tradition of Gowers: make the writing 
 changing what it says or how it sounds. You did not see this document being written; read it as
 its reader will.
 
-Before starting, read `style.md` and `patterns.md` beside this file. Those rules are the standard;
+Before starting, read `style.md` and `patterns.md` beside this file, and `hld.md` as well if the
+document is a High-Level Design. Those rules are the standard;
 do not substitute your own taste for them. Where the project or the user sets a style of its own,
 such as a spelling variety or a house style guide, that style takes precedence.
 
@@ -40,7 +41,8 @@ cohesion.
 
 ## Pass 2: sentences
 
-Check every remaining sentence against `patterns.md` and `style.md`.
+Check every remaining sentence against `patterns.md` and `style.md`, and against `hld.md` for a
+High-Level Design.
 
 ## Pass 3: check the edit
 

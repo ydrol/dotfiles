@@ -1,7 +1,8 @@
 # Writing style
 
 These rules govern narrative and argument wherever they appear: chat, the prose sections of documents, commit
-messages, client deliverables. Structured reference material is exempt and should stay structured.
+messages, client deliverables. Structured reference material is exempt and should stay structured. A High-Level
+Design also follows the register in `hld.md`, beside this file.
 
 - **BLUF is structural, not syntactic.** BLUF (bottom line up front) governs the order of information: lead with the
   conclusion. It does not mean compressed sentence construction. Write in connected, flowing paragraphs, not clipped,
@@ -47,3 +48,10 @@ messages, client deliverables. Structured reference material is exempt and shoul
   number of". Cut "the fact that" by recasting the sentence. Say a thing once, in the concrete term, rather than
   qualifying it into vagueness. A standard term of the domain, such as a platform's own name for a record or a
   feature, is the plain word for its reader and is never paraphrased away.
+- **One term per thing.** Define each component or concept once and use exactly the same term for it every time
+  afterwards. Vary the sentence, never the noun: a reader assumes that a different word names a different thing.
+- **No promotional language.** Do not use untestable words such as "robust", "seamless", "best-in-class" or
+  "cutting-edge". Replace each with the specific property it implies, such as a retry policy, a polling interval or a
+  measured limit, and delete it if there is no such property. Write "use", not "leverage".
+- **British spelling.** Use British spelling, with -ise endings, unless a house style says otherwise, and keep
+  spelling consistent throughout a document.
