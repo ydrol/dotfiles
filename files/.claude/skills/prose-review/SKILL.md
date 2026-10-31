@@ -1,6 +1,6 @@
 ---
 name: prose-review
-version: 1.3.0
+version: 1.4.0
 description: >
   Edit the prose of a document against the writing-style rules in this skill's style.md, reading it
   cold as its reader would. Use when asked to review, edit, sub-edit or tighten prose; before
@@ -23,8 +23,9 @@ such as a spelling variety or a house style guide, that style takes precedence.
 ## Scope
 
 Edit narrative and argument only. Leave code, tables, frontmatter, headings, quotations,
-identifiers and reference lists untouched. Never change a fact, a figure, a technical term or a
-citation.
+identifiers and reference lists untouched, with one exception: a table cell that refers to another
+cell ("as above", "covered the same way") is rewritten with the content in full. Never change a
+fact, a figure, a technical term or a citation.
 
 ## Pass 1: paragraphs
 

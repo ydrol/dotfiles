@@ -1,7 +1,8 @@
 # Writing style
 
 These rules govern narrative and argument wherever they appear: chat, the prose sections of documents, commit
-messages, client deliverables. Structured reference material is exempt and should stay structured. A High-Level
+messages, client deliverables. Structured reference material is exempt and should stay structured, except that the
+rule on table cells applies to it. A High-Level
 Design also follows the register in `hld.md`, beside this file.
 
 - **BLUF is structural, not syntactic.** BLUF (bottom line up front) governs the order of information: lead with the
@@ -53,5 +54,10 @@ Design also follows the register in `hld.md`, beside this file.
 - **No promotional language.** Do not use untestable words such as "robust", "seamless", "best-in-class" or
   "cutting-edge". Replace each with the specific property it implies, such as a retry policy, a polling interval or a
   measured limit, and delete it if there is no such property. Write "use", not "leverage".
+- **Table cells stand alone.** Every cell must make sense to a reader who sees only its row, so repeat the full content
+  rather than writing "as above", "same as above", "covered the same way" or "ditto". Readers scan a table by row, sort
+  and filter it, and an AI may retrieve a single row; a back-reference fails in each case. If the repetition makes a
+  column heavy, move the shared part into the column heading or a note under the table, and keep each cell complete.
+  Identical cells down a column are not a fault: they show that the rows are the same.
 - **British spelling.** Use British spelling, with -ise endings, unless a house style says otherwise, and keep
   spelling consistent throughout a document.
