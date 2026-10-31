@@ -40,3 +40,10 @@ messages, client deliverables. Structured reference material is exempt and shoul
   reads naturally, but "the rule matches no records" should be "the rule does not match any records". The
   object-negated form is terse and formal, and the reader has to reach the end of the clause before learning that it
   is a negative.
+- **Plain words, after Gowers.** Choose the short, familiar word that says exactly what is meant, and the verb over the
+  noun made from it. Write "decide", not "make a decision"; "check", not "carry out a check"; "to", not "in order to";
+  "before" and "after", not "prior to" and "subsequent to"; "use", "help" and "start", not "utilise", "facilitate" and
+  "commence"; "if", not "in the event that"; "about" or "for", not "with regard to" or "in respect of"; "some", not "a
+  number of". Cut "the fact that" by recasting the sentence. Say a thing once, in the concrete term, rather than
+  qualifying it into vagueness. A standard term of the domain, such as a platform's own name for a record or a
+  feature, is the plain word for its reader and is never paraphrased away.
