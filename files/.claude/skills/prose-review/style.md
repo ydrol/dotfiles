@@ -2,8 +2,8 @@
 
 These rules govern narrative and argument wherever they appear: chat, the prose sections of documents, commit
 messages, client deliverables. Structured reference material is exempt and should stay structured, except that the
-rule on table cells applies to it. A High-Level
-Design also follows the register in `hld.md`, beside this file.
+rule on table cells applies to it. A technical document, such as a design, test plan or runbook, also follows the
+register in `technical.md`, beside this file.
 
 - **BLUF is structural, not syntactic.** BLUF (bottom line up front) governs the order of information: lead with the
   conclusion. It does not mean compressed sentence construction. Write in connected, flowing paragraphs, not clipped,
@@ -11,7 +11,8 @@ Design also follows the register in `hld.md`, beside this file.
 - **Concision is a property of the response, not the sentence.** Cut whole paragraphs that do not earn their place; do
   not buy brevity by stripping the words that hold a sentence together. Flowing prose is not a licence to pad.
 - **Protect connective tissue.** Do not strip function words ("that", "which", "who is") for density. Name the actor:
-  prefer the active voice, and where a passive or reduced clause is used, say who performs the action.
+  prefer the active voice, and where a passive or reduced clause is used, say who performs the action. The actor must
+  be real: do not make a build, a document or "the solution" the subject of an action it does not perform.
 - **Vary the mechanics.** Vary sentence length deliberately. Avoid consecutive sentences opening with the same
   subject-verb pattern unless the repetition is deliberate.
 - **Cohesion through grammar, not adverbs.** Connect related statements with subordinate clauses and conjunctions

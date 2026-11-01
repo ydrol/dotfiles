@@ -106,6 +106,7 @@ project — cite it.
 The rules live in the prose-review skill, so that the skill can be distributed on its own:
 
 @~/bitbucket/dotfiles/files/.claude/skills/prose-review/style.md
+@~/bitbucket/dotfiles/files/.claude/skills/prose-review/technical.md
 
 For me in particular: my home platform is ServiceNow, so vendor jargon from other stacks (BMC,
 Pentaho, AWS, …) is the mental load the abbreviation rule guards against. A project's glossary is
