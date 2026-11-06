@@ -15,7 +15,6 @@ Each entry pairs a failure with its repair. Add new entries as they are spotted.
 | each response, both from order placement and from every poll | each response, whether to the original order or to a later poll |
 | Staging tables hold each response … Staging lets the control compare it | Staging tables hold each response … Keeping the response there lets the control compare it |
 | a robust, seamless integration | an integration that retries failed requests three times with exponential back-off |
-| the job leverages the API | the job uses the API |
 | the build adds the following tables | the application contains the following tables |
 | this section describes the retry policy | (state the retry policy) |
 | (table cell) Custom table, covered the same way | (table cell) Custom table; covered by the bundled custom table allowance |

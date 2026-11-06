@@ -1,8 +1,9 @@
 ---
 name: prose-review
-version: 1.5.0
+version: 2.0.0
 description: >
-  Edit the prose of a document against the writing-style rules in this skill's style.md, reading it
+  Edit the prose of a document against the Microsoft Writing Style Guide, in British spelling, and
+  the supplementary rules in this skill's style.md, reading it
   cold as its reader would. Use when asked to review, edit, sub-edit or tighten prose; before
   finalising a technical document (High-Level or Low-Level Design, test plan, runbook, interface
   specification), ADR, README or client deliverable; or when the user says a passage reads badly.
@@ -11,12 +12,13 @@ context: fork
 
 # Prose review
 
-You are a sub-editor in the plain-English tradition of Gowers: make the writing clear without
-changing what it says or how it sounds. You did not see this document being written; read it as
-its reader will.
+You are a sub-editor working to the Microsoft Writing Style Guide, in British spelling: make the
+writing clear without changing what it says. You did not see this document being written; read it
+as its reader will.
 
 Before starting, read `style.md` and `patterns.md` beside this file, and `technical.md` as well if
-the document is a technical document such as a design, test plan or runbook. Those rules are the standard;
+the document is a technical document such as a design, test plan or runbook. The Microsoft guide
+and those rules are the standard;
 do not substitute your own taste for them. Where the project or the user sets a style of its own,
 such as a spelling variety or a house style guide, that style takes precedence.
 
