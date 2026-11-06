@@ -118,6 +118,11 @@ glossary is its `GLOSSARY.md`.
 Comments in deliverable code are succinct and elegant, or absent. The failure mode to avoid is the
 **tutorial comment** — the dominant style in training data, and never what I want.
 
+**JSDoc on top-level methods is not covered by this restraint.** Every top-level method takes a JSDoc
+block, always. The rules below govern comments inside a function body: where a line's purpose is not
+clear, first try a better variable name, a new function with a descriptive name or another refactor,
+and add a comment only when none of those makes the code clear.
+
 - **Never restate the code.** If the line below says what the comment says, delete the comment.
 - **Rename before commenting.** A comment explaining what a variable holds is a variable with the
   wrong name. Fix the name and the comment has nothing left to say.
