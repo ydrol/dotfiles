@@ -125,8 +125,8 @@ docker exec homeassistant python3 -c "import importlib.metadata as m; print(m.ve
 After the restart on 20 November 2026 at 00:00, the HA log did not record any `FcmPushClient` error. Before the patch,
 the client crashed within seconds of each restart, on a message that FCM had queued for it. A doorbell press at 00:05
 changed **TW Door Ding** from *Unknown* to 00:05:17 and rang the Reolink Chime. The Ding entity updated three times
-between 00:05:17 and 00:05:21. The **Motion** entity still showed 5 September 2026, so motion events were not
-confirmed.
+between 00:05:17 and 00:05:21. The **Motion** entity still showed 5 September 2026 at that point, but it
+recorded motion events from 08:55 onwards on 20 November 2026, which confirms that motion pushes reach HA.
 
 To check the result after reapplying the patch, press the doorbell: **TW Door Ding** changes to the time of the press
 within a few seconds, and the Chime rings. If the push client fails again, the HA log contains the line
@@ -141,17 +141,131 @@ docker exec homeassistant python3 -c "import sqlite3; c=sqlite3.connect('file:/c
 
 - In Ring Control Center, five stale HA client registrations were removed: two `ring-doorbell:HomeAssistant` entries
   and three `Qemu Python` entries. The Ring integration in HA was then re-authenticated.
-- The automation *Ring doorbell → Reolink Chime* uses a State trigger on `event.front_door_ding` with
-  `not_from: unavailable`, and runs the `reolink.play_chime` action on Chime1.
+- The automation that rings the Reolink Chime uses a State trigger on `event.front_door_ding` with
+  `not_from: unavailable`, and runs the `reolink.play_chime` action on Chime1. The automation is described in full
+  under [Automations](#automations).
+
+## Automations
+
+Two automations in `/config/automations.yaml` act on the Ring events. Both were in place on 20 November 2026.
+
+### Duplicate Ding events
+
+Ring delivers each doorbell press to HA as several Ding events within about four seconds, although the Ring app records
+a single Missed Ring. The HA recorder database shows the following updates to `event.front_door_ding` on
+20 November 2026:
+
+| Press | Ding entity updates                      | Chime plays before the fix |
+|-------|------------------------------------------|----------------------------|
+| 19:44 | 19:44:53.345, 19:44:53.723, 19:44:56.881 | 2                          |
+| 20:25 | 20:26:05.165, 20:26:06.211, 20:26:09.053 | 3                          |
+
+The `ring-doorbell` library treats a push message as an update to an earlier alert, and discards it, only when the
+alert id and the alert timestamp both match. The duplicates pass that check, probably because their timestamps differ,
+but the alert ids have not been logged, so the cause is unconfirmed.
+
+An automation in `single` mode ignores a trigger only while a run is still in progress. The `reolink.play_chime` action
+returns as soon as the hub accepts the command, without waiting for the tune to finish, so a run completes in under a
+second and each later duplicate starts a new run. At 19:44 the second update arrived 0.4 seconds after the first,
+while the first run was still in progress, which is why that press played the chime twice rather than three times.
+
+### Front Door Ring - Set Reolink Hub
+
+The automation plays the `originaltune` ringtone on Chime1 for each doorbell press, then toggles
+`number.reolink_home_hub_message_volume` between 40 and 41. A 10-second `delay` as its last action keeps each run in
+progress until the duplicate Ding events have arrived, so `mode: single` discards them, and `max_exceeded: silent` stops
+HA from logging an *Already running* warning for each one. A second genuine press within 10 seconds of the first does
+not play the chime.
+
+```yaml
+alias: Front Door Ring - Set Reolink Hub
+triggers:
+  - trigger: state
+    entity_id:
+      - event.front_door_ding
+    not_from: unavailable
+actions:
+  - action: reolink.play_chime
+    data:
+      device_id:
+        - 0d858487d587251ae9359ba3cc083ec8
+      ringtone: originaltune
+  - action: number.set_value
+    target:
+      entity_id: number.reolink_home_hub_message_volume
+    data:
+      value: >
+        {{ 40 if states('number.reolink_home_hub_message_volume') | int != 40
+        else 41 }}
+  - delay: "00:00:10"
+mode: single
+max_exceeded: silent
+```
+
+### Front door – motion without a ring
+
+The automation plays the `waybackhome` ringtone on Chime1 when someone approaches the door but does not press the
+doorbell. The Ring app labels such an event *Person Detected*, but HA cannot make the same distinction: the Ring
+integration's Motion event entity has the single event type `motion`, and the `ring-doorbell` library's alert does not
+carry Ring's detection type. The automation therefore triggers on any motion event that Ring pushes to HA.
+
+Each motion event starts a run, unless a Ding event occurred in the previous two minutes, because Ring sends motion
+events alongside each doorbell press. The run waits 20 seconds for a Ding event and plays the chime only if none
+arrives. On 20 November 2026 the first Ding came 5, 12 and 11 seconds after the first motion event of the presses at
+09:46, 19:44 and 20:25, so the 20-second wait leaves about 8 seconds of margin. Raise the wait to 30 seconds if the
+chime plays for visitors who did ring.
+
+```yaml
+alias: Front door – motion without a ring
+triggers:
+  - trigger: state
+    entity_id: event.front_door_motion
+    not_from: unavailable
+conditions:
+  - condition: template
+    value_template: >
+      {{ states('event.front_door_ding') in ['unknown', 'unavailable']
+         or now() - as_datetime(states('event.front_door_ding')) > timedelta(minutes=2) }}
+actions:
+  - wait_for_trigger:
+      - trigger: state
+        entity_id: event.front_door_ding
+        not_from: unavailable
+    timeout: "00:00:20"
+    continue_on_timeout: true
+  - if:
+      - condition: template
+        value_template: "{{ wait.trigger is none }}"
+    then:
+      - action: number.set_value
+        target:
+          entity_id: number.reolink_home_hub_message_volume
+        data:
+          value: >
+            {{ 40 if states('number.reolink_home_hub_message_volume') | int != 40
+            else 41 }}
+      - action: reolink.play_chime
+        data:
+          device_id:
+            - 0d858487d587251ae9359ba3cc083ec8
+          ringtone: waybackhome
+mode: single
+```
 
 ## Open work
 
-- Post the findings on [home-assistant/core#192723](https://github.com/home-assistant/core/issues/192723). Remove this
-  patch once a fixed `firebase-messaging` ships in HA.
-- Confirm that a motion event updates the **Motion** entity, and check that motion alerts are enabled in the Ring app.
-- Add a 5-second `delay` as the last action of the automation, with the mode left at `single`. The Ring app recorded
-  one press at 00:05, but HA's Ding entity updated three times within four seconds. Each update triggers the
-  automation, and the delay makes the automation ignore the updates that follow the first.
+- Post the findings on [home-assistant/core#192723](https://github.com/home-assistant/core/issues/192723), including
+  the duplicate Ding events. Remove this patch once a fixed `firebase-messaging` ships in HA.
+- Confirm whether the duplicate Ding events share an alert id. Before a doorbell press, run the `logger.set_level`
+  action with `ring_doorbell: debug` and `firebase_messaging: debug`, then read the raw alerts in the HA log. The log
+  level reverts at the next restart.
+- To make the motion automation fire only for people, turn off the *Other Motion* alert type in the Ring app's Smart
+  Alerts and keep *People* on. Whether Ring then stops sending the other motion events to HA has not been tested.
+- Add `max_exceeded: silent` to the motion automation. Its runs are still logging an *Already running* warning for
+  each repeated motion event.
+- The HA log recorded `Unexpected exception during read` from `firebase_messaging.fcmpushclient` at 03:58 and 12:47 on
+  20 November 2026, and a server Close message at 15:39. Ding and Motion events arrived after each one, so the push
+  client recovered. Watch for a recurrence that does not recover.
 
 ## patch_fcm_headers.py
 
