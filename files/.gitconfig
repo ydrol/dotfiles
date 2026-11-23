@@ -2,3 +2,5 @@
 	rebase = true
 [user]
 	name = Andy Lord
+[rebase]
+	autoStash = true
